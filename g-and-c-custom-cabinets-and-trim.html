@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G and C Custom Cabinets and Trim — Edmond, OK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F5EF;
+    --linen:#EFE9DC;
+    --forest:#1F2E22;
+    --forest-deep:#131C16;
+    --brass:#B08D4F;
+    --brass-deep:#8C6E37;
+    --ink:#1B1B16;
+    --sage:#5F6B57;
+    --line:#DCD5C4;
+    --radius:2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:0.002em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--brass);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+
+  /* ---------- Splash intro ---------- */
+  .splash{
+    position:fixed;inset:0;z-index:9999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+    background:radial-gradient(ellipse 1000px 700px at 50% 35%, #24352A 0%, var(--forest) 55%, var(--forest-deep) 100%);
+    overflow:hidden;
+    transition:opacity .6s ease, visibility .6s ease;
+  }
+  .splash.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  .splash-mark{
+    width:64px;height:64px;opacity:0;
+    transform:scale(1.4);
+    animation:mark-in .5s cubic-bezier(.2,1.3,.4,1) forwards .4s;
+  }
+  .splash-mark path{filter:drop-shadow(0 0 14px rgba(176,141,79,0.7));}
+  @keyframes mark-in{to{opacity:1;transform:scale(1);}}
+  .splash-word{
+    font-family:'Playfair Display',serif;color:var(--cream);
+    font-size:23px;font-weight:600;letter-spacing:0.04em;
+    opacity:0;transform:translateY(8px);
+    animation:word-in .5s ease forwards .9s;
+  }
+  .splash-word span{color:var(--brass);font-style:italic;}
+  @keyframes word-in{to{opacity:1;transform:translateY(0);}}
+  .splash-profile{
+    width:180px;height:18px;opacity:0;
+    animation:word-in .4s ease forwards 1.2s;
+  }
+  .splash-profile path{
+    stroke:var(--brass);stroke-width:1.4;fill:none;
+    stroke-dasharray:220;stroke-dashoffset:220;
+    animation:draw-profile 1s ease forwards 1.3s;
+  }
+  @keyframes draw-profile{to{stroke-dashoffset:0;}}
+  @media (prefers-reduced-motion: reduce){.splash{display:none;}}
+
+  /* Crown-molding profile stripe — signature element */
+  .profile-stripe{
+    height:22px;background:var(--linen);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    overflow:hidden;position:relative;
+  }
+  .profile-stripe svg{width:100%;height:100%;display:block;}
+  .profile-stripe path{stroke:var(--brass-deep);stroke-width:1.2;fill:none;opacity:0.55;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(248,245,239,0.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;}
+  .logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;letter-spacing:0.01em;}
+  .brand-mark{
+    width:36px;height:36px;flex-shrink:0;border-radius:var(--radius);
+    background:linear-gradient(155deg,#2C4033 0%,var(--forest) 55%,var(--forest-deep) 100%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 10px -2px rgba(19,28,22,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .brand-mark svg{width:19px;height:19px;}
+  nav ul{list-style:none;display:flex;gap:30px;}
+  nav a{
+    font-size:0.86rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;
+    color:var(--ink);padding-bottom:4px;border-bottom:2px solid transparent;transition:color .2s, border-color .2s;
+  }
+  nav a:hover{color:var(--brass-deep);border-bottom-color:var(--brass);}
+  .navlist-desktop{display:none;}
+  @media(min-width:900px){.navlist-desktop{display:flex;}}
+  .nav-call{
+    background:linear-gradient(155deg,#C4A05E 0%,var(--brass) 55%,var(--brass-deep) 100%);
+    color:var(--forest-deep);padding:10px 20px;font-weight:700;text-transform:uppercase;
+    font-size:0.83rem;letter-spacing:0.04em;border-radius:var(--radius);
+    box-shadow:0 4px 12px -4px rgba(140,110,55,0.5);transition:transform .15s;
+  }
+  .nav-call:hover{transform:translateY(-1px);}
+  @media(max-width:900px){.nav-call{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;background:var(--forest);overflow:hidden;padding:88px 28px 70px;}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(176,141,79,0.16), transparent 45%),
+      radial-gradient(circle at 8% 90%, rgba(255,255,255,0.04), transparent 40%);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:1200px;margin:0 auto;position:relative;display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center;}
+  @media(max-width:860px){.hero-inner{grid-template-columns:1fr;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;color:var(--brass);
+    font-size:0.78rem;letter-spacing:0.16em;font-weight:700;text-transform:uppercase;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--brass);}
+  .hero h1{color:var(--cream);font-size:clamp(2.3rem,4.8vw,3.5rem);margin-bottom:22px;}
+  .hero h1 em{color:var(--brass);font-style:italic;}
+  .hero p{color:#D3D6CB;max-width:520px;font-size:1.02rem;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:linear-gradient(155deg,#C4A05E 0%,var(--brass) 55%,var(--brass-deep) 100%);
+    color:var(--forest-deep);padding:14px 26px;font-weight:700;text-transform:uppercase;
+    font-size:0.88rem;letter-spacing:0.04em;border-radius:var(--radius);
+    box-shadow:0 8px 20px -8px rgba(140,110,55,0.55);transition:transform .15s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-outline{
+    border:1.5px solid #4C5C4F;color:var(--cream);padding:13px 26px;font-weight:600;
+    text-transform:uppercase;font-size:0.86rem;letter-spacing:0.04em;border-radius:var(--radius);
+    transition:border-color .15s, background .15s;
+  }
+  .btn-outline:hover{border-color:var(--brass);background:rgba(176,141,79,0.1);}
+
+  .hero-badge{
+    background:var(--forest-deep);border:1px solid #2C3E30;border-radius:6px;padding:28px;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .stars{color:var(--brass);letter-spacing:2px;font-size:1.1rem;}
+  .score{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--cream);font-weight:700;margin-top:4px;}
+  .score-label{color:#9FAC96;font-size:0.85rem;margin-bottom:18px;}
+  .badge-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid #2C3E30;font-size:0.87rem;}
+  .badge-row .k{color:#9FAC96;}
+  .badge-row .v{color:var(--cream);font-weight:600;text-align:right;}
+  .dot-closed{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brass);margin-right:6px;}
+
+  /* SECTIONS shared */
+  .section-inner{max-width:1200px;margin:0 auto;padding:88px 28px;}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head .eyebrow{color:var(--brass-deep);}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.5rem);margin-bottom:14px;}
+  .section-head p{color:var(--sage);font-size:1.02rem;}
+
+  /* SERVICES */
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
+  @media(max-width:860px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{background:var(--cream);padding:32px 28px;transition:background .2s;}
+  .service-card:hover{background:var(--linen);}
+  .service-ic{width:36px;height:36px;margin-bottom:18px;color:var(--brass-deep);}
+  .service-card h3{font-size:1.1rem;margin-bottom:10px;}
+  .service-card p{color:var(--sage);font-size:0.94rem;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:center;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-visual{background:var(--forest);border-radius:6px;padding:40px 32px;color:var(--cream);}
+  .big-num{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--brass);font-weight:700;}
+  .big-num-label{color:#9FAC96;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:20px;}
+  .divider{height:1px;background:#2C3E30;margin:20px 0;}
+  .about-text h2{font-size:clamp(1.8rem,3.2vw,2.3rem);margin-bottom:18px;}
+  .about-text p{color:var(--sage);margin-bottom:16px;}
+  .about-list{list-style:none;margin-top:20px;}
+  .about-list li{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:0.95rem;}
+  .about-list .check{color:var(--brass-deep);font-weight:700;}
+
+  /* REVIEWS */
+  .reviews{background:var(--linen);}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:860px){.review-grid{grid-template-columns:1fr;}}
+  .review-card{background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:28px;}
+  .review-card p{margin:14px 0;font-size:0.98rem;font-style:italic;color:var(--ink);}
+  .review-card .who{color:var(--sage);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  /* CONTACT */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);}
+  @media(max-width:760px){.info-grid{grid-template-columns:1fr;}}
+  .info-panel{background:var(--cream);padding:36px;}
+  .info-panel.dark{background:var(--forest);color:var(--cream);}
+  .info-panel h3{font-size:1.15rem;margin-bottom:22px;}
+  .hours-row{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:0.92rem;}
+  .hours-row.today{font-weight:700;color:var(--brass-deep);}
+  .contact-row{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-top:1px solid #2C3E30;font-size:0.92rem;}
+  .contact-row .label{color:#9FAC96;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;}
+  .contact-row .val a{color:var(--brass);}
+  .map-note{margin-top:20px;color:#9FAC96;font-size:0.85rem;line-height:1.5;}
+
+  /* CTA STRIP */
+  .cta-strip{
+    background:linear-gradient(155deg,#24352A 0%,var(--forest) 55%,var(--forest-deep) 100%);
+    text-align:center;padding:70px 28px;color:var(--cream);
+  }
+  .cta-strip h2{font-size:clamp(1.6rem,3vw,2.1rem);margin-bottom:14px;}
+  .cta-strip p{color:#C4CABC;margin-bottom:28px;}
+
+  footer{background:var(--forest-deep);color:#8FA087;padding:40px 28px 24px;}
+  .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  footer .logo{color:var(--cream);}
+  .footer-links{list-style:none;display:flex;gap:24px;font-size:0.87rem;}
+  .footer-links a:hover{color:var(--brass);}
+  .footer-bottom{margin-top:24px;padding-top:20px;border-top:1px solid #2C3E30;font-size:0.81rem;flex-wrap:wrap;gap:8px;}
+</style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <div class="splash-mark">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M4 20 V6 L12 3 L20 6 V20" stroke="#F8F5EF" stroke-width="1.5"/>
+      <path d="M8 20 V12 H16 V20" stroke="#B08D4F" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="splash-word">G &amp; C <span>Custom</span> Cabinets</div>
+  <svg class="splash-profile" viewBox="0 0 180 18">
+    <path d="M0 14 C 30 14, 30 2, 60 2 S 90 14, 120 14 S 150 2, 180 2"/>
+  </svg>
+</div>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M4 20 V6 L12 3 L20 6 V20" stroke="#F8F5EF" stroke-width="1.5"/>
+          <path d="M8 20 V12 H16 V20" stroke="#B08D4F" stroke-width="1.5"/>
+        </svg>
+      </span>
+      <span class="display">G &amp; C Custom</span>
+    </div>
+    <nav class="navlist-desktop">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="nav-call" href="tel:4054746474">Call (405) 474-6474</a>
+  </div>
+</header>
+<div class="profile-stripe">
+  <svg viewBox="0 0 800 22" preserveAspectRatio="none">
+    <path d="M0 16 C 40 16, 40 4, 80 4 S 120 16, 160 16 S 200 4, 240 4 S 280 16, 320 16 S 360 4, 400 4 S 440 16, 480 16 S 520 4, 560 4 S 600 16, 640 16 S 680 4, 720 4 S 760 16, 800 16"/>
+  </svg>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Edmond, Oklahoma · Free Estimates</div>
+      <h1>Custom cabinets.<br>Fine trim work.<br><em>Anything wood.</em></h1>
+      <p>G and C Custom Cabinets and Trim is a high-end trim company built on 45 years of combined experience. Kitchens, bathrooms, crown molding, base and case, mantles, desks, mudbenches — if it's wood, we can handle it. Insured, referenced, and ready with a free estimate.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="tel:4054746474">Call or Text for a Free Estimate</a>
+        <a class="btn-outline" href="#services">See What We Build</a>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="stars">★★★★★</div>
+      <div class="score">5.0</div>
+      <div class="score-label">21 Google Reviews</div>
+      <div class="badge-row"><span class="k">Status</span><span class="v"><span class="dot-closed"></span>Closed · Opens 8 AM</span></div>
+      <div class="badge-row"><span class="k">Location</span><span class="v">6085 Red Cedar Dr, Edmond</span></div>
+      <div class="badge-row"><span class="k">Experience</span><span class="v">45+ Years Combined</span></div>
+      <div class="badge-row"><span class="k">Coverage</span><span class="v">Insured &amp; Referenced</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">What We Build</div>
+      <h2>High-End Trim &amp; Custom Woodwork</h2>
+      <p>We specialize in anything wood — from full kitchen and bath remodels to the fine detail work that finishes a room. With 45 years of combined experience, there's little we haven't handled.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 12h18M9 4v16"/></svg>
+        <h3>Kitchen &amp; Bath Cabinets</h3>
+        <p>Custom cabinetry built and fitted for kitchens and bathrooms, from design through install.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 16 C4 16 4 8 8 8 S12 16 16 16 S20 8 24 8" transform="translate(0 2)"/></svg>
+        <h3>Crown, Base &amp; Case</h3>
+        <p>Precision crown molding, baseboard, and door or window casing, fit and finished to last.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20 h18 M6 20 V10 h12 v10 M6 10 L12 5 L18 10"/></svg>
+        <h3>Mantles &amp; Fireplace Surrounds</h3>
+        <p>Custom mantles built to become the centerpiece of a living room.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21 V9 L21 9 V21 M3 9 L12 3 L21 9"/></svg>
+        <h3>Desks &amp; Mudbenches</h3>
+        <p>Built-in desks, mudroom benches, and other custom furniture-grade woodwork.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 L3 7 V13 C3 18 7 21.5 12 22 C17 21.5 21 18 21 13 V7 Z"/></svg>
+        <h3>Water &amp; Fire Damage Retrofit</h3>
+        <p>We can retrofit cabinets damaged by water or fire, restoring cabinetry to like-new condition.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12 L11 14 L16 9" /><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Free Estimates</h3>
+        <p>Insured, with references on request — call or text to get a free, no-pressure estimate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner about-grid">
+    <div class="about-visual">
+      <div class="big-num">45+</div>
+      <div class="big-num-label">Years Combined Experience</div>
+      <div class="divider"></div>
+      <div class="big-num">5.0</div>
+      <div class="big-num-label">Average Google Rating</div>
+    </div>
+    <div class="about-text">
+      <h2>Anything wood — done at a high-end standard.</h2>
+      <p>G and C Custom Cabinets and Trim is a high-end trim company built on 45 years of combined experience. There's very little the team hasn't handled — from full kitchen and bathroom remodels to crown molding, mantles, desks, and mudbenches.</p>
+      <p>The team can also retrofit cabinets damaged by water or fire. Fully insured, with plenty of references available on request.</p>
+      <ul class="about-list">
+        <li><span class="check">✓</span> 45+ years of combined trim &amp; cabinetry experience</li>
+        <li><span class="check">✓</span> Insured, with references available</li>
+        <li><span class="check">✓</span> Water &amp; fire damage cabinet retrofits</li>
+        <li><span class="check">✓</span> Free estimates — call or text</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Word of Mouth</div>
+      <h2>What Customers Are Saying</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"The price was in budget, the work was phenomenal!"</p>
+        <div class="who">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"We are thrilled with the remodeled kitchen from you all!"</p>
+        <div class="who">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Loved their customer service and attention to detail."</p>
+        <div class="who">Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Get In Touch</div>
+      <h2>Hours &amp; Location</h2>
+      <p>Call or text ahead for a free estimate — we'll talk through the project and timeline.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-panel">
+        <h3>Hours</h3>
+        <div class="hours-row today"><span class="day">Today</span><span class="time">Opens 8 AM</span></div>
+        <div class="hours-row"><span class="day">Monday</span><span class="time">8 AM – 5 PM</span></div>
+        <div class="hours-row"><span class="day">Tuesday</span><span class="time">8 AM – 5 PM</span></div>
+        <div class="hours-row"><span class="day">Wednesday</span><span class="time">8 AM – 5 PM</span></div>
+        <div class="hours-row"><span class="day">Thursday</span><span class="time">8 AM – 5 PM</span></div>
+        <div class="hours-row"><span class="day">Friday</span><span class="time">8 AM – 5 PM</span></div>
+        <div class="hours-row"><span class="day">Saturday</span><span class="time">By Appointment</span></div>
+        <div class="hours-row"><span class="day">Sunday</span><span class="time">Closed</span></div>
+      </div>
+      <div class="info-panel dark">
+        <h3>Contact &amp; Location</h3>
+        <div class="contact-row"><span class="label">Address</span><span class="val">6085 Red Cedar Dr, Edmond, OK 73025</span></div>
+        <div class="contact-row"><span class="label">Phone</span><span class="val"><a href="tel:4054746474">(405) 474-6474</a></span></div>
+        <div class="contact-row"><span class="label">Booking</span><span class="val">Call or text for a free estimate</span></div>
+        <div class="contact-row"><span class="label">Reviews</span><span class="val">★★★★★ 5.0 on Google (21 reviews)</span></div>
+        <div class="map-note">Located in Edmond, Oklahoma County — about a 36 minute drive from central Oklahoma City.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <h2>Ready to talk about your project?</h2>
+  <p>Call or text (405) 474-6474 for a free estimate — insured, referenced, and ready to help.</p>
+  <a class="btn-primary" href="tel:4054746474">Call (405) 474-6474</a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="logo">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M4 20 V6 L12 3 L20 6 V20" stroke="#F8F5EF" stroke-width="1.5"/>
+          <path d="M8 20 V12 H16 V20" stroke="#B08D4F" stroke-width="1.5"/>
+        </svg>
+      </span>
+      <span class="display">G &amp; C Custom</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom footer-inner">
+    <span>© 2026 G and C Custom Cabinets and Trim · Edmond, OK</span>
+    <span>6085 Red Cedar Dr, Edmond, OK 73025 · (405) 474-6474</span>
+  </div>
+</footer>
+
+<script>
+  const splash = document.getElementById('splash');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (splash && !reducedMotion) {
+    document.body.style.overflow = 'hidden';
+    let dismissed = false;
+    const dismissSplash = () => {
+      if (dismissed) return;
+      dismissed = true;
+      splash.classList.add('hide');
+      document.body.style.overflow = '';
+      setTimeout(() => { splash.style.display = 'none'; }, 700);
+    };
+    const autoTimer = setTimeout(dismissSplash, 2300);
+    ['click','keydown','touchstart','wheel'].forEach(evt=>{
+      splash.addEventListener(evt, () => { clearTimeout(autoTimer); dismissSplash(); }, {once:true});
+    });
+  } else if (splash) {
+    splash.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
